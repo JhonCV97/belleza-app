@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Venta de Cosméticos - Belleza
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Datos del cliente</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Nombre del cliente</ion-label>
+        <ion-input [(ngModel)]="ClientName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Cédula</ion-label>
+        <ion-input [(ngModel)]="ClientId"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Dirección de entrega</ion-label>
+        <ion-input [(ngModel)]="Address"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Selección de productos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Producto</ion-label>
+        <ion-select [(ngModel)]="SelectedProduct">
+          <ion-select-option *ngFor="let product of Products" [value]="product">
+            {{ product.Name }} - {{ product.Price | currency:'USD':'symbol':'1.2-2' }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Cantidad: </ion-label>
+        <ion-input type="number" [(ngModel)]="QuantityProduct"></ion-input>
+      </ion-item>
+      <ion-button (click)="AddProduct()" expand="full">Agregar Producto</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="Sale.Products.length > 0">
+    <ion-card-header>
+      <ion-card-title>Carrito de Compra</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let item of Sale.Products">
+          <div class="linea-labels">
+            <ion-label>{{ item.Product.Name }}</ion-label>
+            <ion-label>Cant: {{ item.Amount }}</ion-label>
+          </div>
+          <ion-label slot="end">{{ item.TotalPrice | currency:'USD':'symbol':'1.2-2' }}</ion-label>
+        </ion-item>
+      </ion-list>
+      <ion-item lines="none">
+        <ion-label>Total:</ion-label>
+        <ion-label slot="end">{{ Sale.Total | currency:'USD':'symbol':'1.2-2' }}</ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

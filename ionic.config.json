@@ -1,0 +1,7 @@
+{
+  "name": "belleza-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
